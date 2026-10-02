@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ดาวน์โหลด AI Araiwa</title>
+<meta name="description" content="AI Araiwa พิธีกร AI ไลฟ์ขายของบน TikTok ดาวน์โหลดโปรแกรมสำหรับ Windows">
+<link rel="icon" href="img/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f7fb; --surface: #ffffff; --line: #e3e9f2; --text: #131c35; --text-2: #33405e; --muted: #5b6782;
+    --blue: #1a8cf0; --blue-ink: #0b5bb0; --blue-soft: #e8f3fe; --amber-soft: #fff4dc; --amber: #8a4f00;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "IBM Plex Sans Thai", "Leelawadee UI", system-ui, sans-serif; }
+  a { color: var(--blue-ink); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  header.top { display: flex; align-items: center; gap: 10px; padding: 18px 0; }
+  header.top img { width: 40px; height: 40px; }
+  header.top b { font-size: 19px; } header.top b span { color: var(--blue); }
+
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 40px 0 56px; }
+  .hero h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.2; margin: 0 0 14px; }
+  .hero h1 em { font-style: normal; color: var(--blue); }
+  .hero p.lead { font-size: 18px; color: var(--text-2); margin: 0 0 28px; max-width: 34em; }
+  .hero .art { display: grid; place-items: center; }
+  .hero .art img { width: min(100%, 380px); }
+
+  .dl { display: inline-flex; align-items: center; gap: 12px; padding: 16px 26px; border-radius: 14px; background: var(--blue); color: #fff;
+    font-size: 18px; font-weight: 700; text-decoration: none; box-shadow: 0 10px 26px rgba(26,140,240,.3); min-height: 56px; }
+  .dl:hover { background: #127fe0; }
+  .dl svg { flex: none; }
+  .dl-meta { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .dl-meta a { margin-left: 6px; }
+
+  section.block { padding: 48px 0; border-top: 1px solid var(--line); }
+  section.block h2 { font-size: 26px; margin: 0 0 22px; }
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; counter-reset: s; list-style: none; padding: 0; margin: 0; }
+  .steps li { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; counter-increment: s; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--blue); color: #fff; font-weight: 700; margin-bottom: 10px; }
+  .steps b { display: block; margin-bottom: 4px; }
+  .steps span { font-size: 14px; color: var(--muted); }
+  .warn { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--amber-soft); color: var(--amber); font-size: 15px; }
+
+  .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .feature { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  .feature b { display: block; margin-bottom: 4px; }
+  .feature span { font-size: 14px; color: var(--muted); }
+  .feature i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--blue-soft); color: var(--blue-ink);
+    margin-bottom: 10px; font-style: normal; }
+
+  .req { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .req ul { margin: 0; padding-left: 20px; color: var(--text-2); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 8px; font-size: 17px; }
+  .versions { list-style: none; margin: 0; padding: 0; }
+  .versions li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .versions li span { color: var(--muted); }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding-top: 16px; } .hero .art { order: -1; } .hero .art img { width: 220px; }
+    .steps, .features, .req { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) { .steps, .features, .req { grid-template-columns: 1fr; } .dl { width: 100%; justify-content: center; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top"><img src="img/mark.png" alt=""><b>AI <span>Araiwa</span></b></header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>พิธีกร AI<br><em>ไลฟ์ขายของบน TikTok</em> แทนคุณ</h1>
+          <p class="lead">AI เขียนบทขายจากสินค้าในไลฟ์ พูดเป็นเสียงไทย ตอบคอมเมนต์เรียกชื่อลูกค้า และปักตะกร้าให้เอง ส่งสัญญาณขึ้นไลฟ์ตรงโดยไม่ต้องใช้ OBS</p>
+          <a class="dl" id="dl" href="https://github.com/panthilasii/ai-araiwa-releases/releases/latest">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5"></path><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path></svg>
+            <span id="dlText">ดาวน์โหลดสำหรับ Windows</span>
+          </a>
+          <div class="dl-meta" id="dlMeta">Windows 10/11 (64-bit)</div>
+        </div>
+        <div class="art"><img src="img/logo.png" alt="AI Araiwa"></div>
+      </section>
+
+      <section class="block">
+        <h2>เริ่มใช้งานใน 4 ขั้น</h2>
+        <ol class="steps">
+          <li><b>ดาวน์โหลดและติดตั้ง</b><span>ดับเบิลคลิกไฟล์ AI-Araiwa-Setup แล้วกดถัดไปจนเสร็จ</span></li>
+          <li><b>เข้าสู่ระบบ License</b><span>ใส่ชื่อผู้ใช้ รหัสผ่าน และ License Key ที่ได้รับ</span></li>
+          <li><b>เตรียมไลฟ์</b><span>ใส่ API Key, ล็อกอิน TikTok, ดึงสินค้าจาก LIVE Manager, เลือกเสียงและพิธีกร</span></li>
+          <li><b>ขึ้นไลฟ์</b><span>ซ้อมในห้องไลฟ์ก่อน แล้วกด “ขึ้นไลฟ์” ระบบทำที่เหลือให้</span></li>
+        </ol>
+        <p class="warn"><b>ถ้า Windows ขึ้นหน้าจอสีน้ำเงิน “Windows protected your PC”</b> ให้กด <b>More info</b> แล้วกด <b>Run anyway</b> — ขึ้นเฉพาะครั้งแรกที่ติดตั้ง หลังจากนั้นโปรแกรมอัปเดตตัวเองอัตโนมัติ</p>
+      </section>
+
+      <section class="block">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <div class="features">
+          <div class="feature"><i>AI</i><b>เขียนบทและพูดขายเอง</b><span>วนขายสินค้าทีละชิ้น ไม่ซ้ำมุก เลือกบุคลิกพิธีกรได้</span></div>
+          <div class="feature"><i>ไทย</i><b>เสียงพากย์ไทย 10 เสียง</b><span>เสียงธรรมชาติ ฟังตัวอย่างก่อนเลือกได้</span></div>
+          <div class="feature"><i>แชท</i><b>ตอบคอมเมนต์เรียลไทม์</b><span>เรียกชื่อลูกค้า ตอบคำถามสินค้า ขอบคุณคนกดติดตาม</span></div>
+          <div class="feature"><i>ตะกร้า</i><b>ปักตะกร้าอัตโนมัติ</b><span>ปักตามที่ AI พูด หรือผู้ชมพิมพ์ “ตะกร้า 3” แล้วปักให้</span></div>
+          <div class="feature"><i>LIVE</i><b>ไลฟ์ตรงไม่ต้องใช้ OBS</b><span>สร้างห้องและส่งสัญญาณให้เอง ไลฟ์พร้อมกันได้ 2 บัญชี</span></div>
+          <div class="feature"><i>สรุป</i><b>รายงานหลังไลฟ์</b><span>ยอดคอมเมนต์ คำถามยอดฮิต สินค้าที่ถูกพูดถึง</span></div>
+        </div>
+      </section>
+
+      <section class="block req">
+        <div class="card">
+          <h3>ความต้องการของเครื่อง</h3>
+          <ul>
+            <li>Windows 10 หรือ 11 (64-bit)</li>
+            <li>RAM 8 GB ขึ้นไป (ไลฟ์ 2 บัญชีพร้อมกัน แนะนำ 16 GB)</li>
+            <li>อินเทอร์เน็ตอัปโหลด 10 Mbps ขึ้นไปต่อ 1 ไลฟ์</li>
+            <li>บัญชี TikTok ที่ไลฟ์ผ่าน LIVE Manager ได้</li>
+            <li>Google Gemini API Key (สร้างฟรีที่ aistudio.google.com)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>เวอร์ชันล่าสุด</h3>
+          <ul class="versions" id="versions"><li>กำลังโหลด…</li></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>© AI Araiwa · ต้องมี License เพื่อใช้งาน · 1 License ใช้ได้ 1 เครื่อง</footer>
+  </div>
+
+<script>
+  // Point the button at the newest installer (GitHub API; falls back to the releases page).
+  const fmtSize = (b) => (b / 1048576).toFixed(0) + " MB";
+  const fmtDate = (d) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+  fetch("https://api.github.com/repos/panthilasii/ai-araiwa-releases/releases?per_page=6")
+    .then((r) => r.json())
+    .then((list) => {
+      const rel = list.filter((r) => !r.draft && r.assets.some((a) => /\.exe$/i.test(a.name)));
+      if (!rel.length) throw new Error("no release");
+      const latest = rel.find((r) => !r.prerelease) || rel[0];
+      const exe = latest.assets.find((a) => /\.exe$/i.test(a.name));
+      const v = latest.tag_name.replace(/^v/, "");
+      document.getElementById("dl").href = exe.browser_download_url;
+      document.getElementById("dlText").textContent = `ดาวน์โหลด AI Araiwa ${v}`;
+      document.getElementById("dlMeta").innerHTML = "";
+      document.getElementById("dlMeta").append(`Windows 10/11 (64-bit) · ${fmtSize(exe.size)} · ${fmtDate(latest.published_at)}`);
+      const ul = document.getElementById("versions");
+      ul.innerHTML = "";
+      for (const r of rel) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = r.html_url;
+        a.textContent = "เวอร์ชัน " + r.tag_name.replace(/^v/, "") + (r.prerelease ? " (ทดสอบ)" : "");
+        const span = document.createElement("span");
+        span.textContent = fmtDate(r.published_at);
+        li.append(a, span);
+        ul.append(li);
+      }
+    })
+    .catch(() => {
+      document.getElementById("versions").innerHTML = '<li><a href="https://github.com/panthilasii/ai-araiwa-releases/releases">ดูทุกเวอร์ชัน</a></li>';
+    });
+</script>
+</body>
+</html>
