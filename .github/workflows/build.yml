@@ -1,0 +1,70 @@
+# Builds the Windows installer from the private source repo and publishes it here
+# (the auto-update feed). Runs in this public repo because public repos get free Actions.
+#
+# Run: Actions → build → Run workflow → tag (e.g. v0.1.7)
+#      or: gh workflow run build.yml -R panthilasii/ai-araiwa-releases -f tag=v0.1.7
+# Secret: SOURCE_DEPLOY_KEY — read-only deploy key of panthilasii/ai-araiwa.
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Source tag to build (e.g. v0.1.7)"
+        required: true
+
+permissions:
+  contents: write  # create the release + upload the installer
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: panthilasii/ai-araiwa
+          ref: ${{ inputs.tag }}
+          ssh-key: ${{ secrets.SOURCE_DEPLOY_KEY }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip -q
+          pip install -q -r requirements-core.txt -r requirements-build.txt
+
+      - name: Compile core
+        run: python scripts/build_core.py > build-core.log 2>&1; if ($LASTEXITCODE) { Get-Content build-core.log -Tail 40; exit 1 }
+        shell: pwsh
+
+      - name: Smoke-test compiled core
+        shell: pwsh
+        run: |
+          $env:ARAIWA_CORE_TOKEN = "ci"; $env:ARAIWA_PORT = "8899"; $env:ARAIWA_DATA = "$env:RUNNER_TEMP\araiwa"
+          $env:ARAIWA_WEB = "$PWD\web"
+          $p = Start-Process -FilePath dist-core\ai-core\ai-core.exe -PassThru -RedirectStandardOutput core.out -RedirectStandardError core.err
+          Start-Sleep -Seconds 15
+          $r = Invoke-RestMethod -Uri http://127.0.0.1:8899/api/app -Headers @{ "x-araiwa-token" = "ci" }
+          if (-not $r.accounts) { throw "core did not answer" }
+          Stop-Process -Id $p.Id
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+
+      - name: Build and publish installer
+        working-directory: desktop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          npm ci --silent
+          npm version ("${{ inputs.tag }}" -replace '^v','') --no-git-tag-version --allow-same-version
+          npm run release:win
